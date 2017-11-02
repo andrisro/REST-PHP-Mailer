@@ -2,10 +2,15 @@
 //(C)opyright 2017 by Andris Roling
 //GIT https://github.com/andrisro/REST-PHP-Mailer
 
-//Version: 1.1
+//Version: 1.2
 
 //Predefined Variables
 $to = "yourfirstname.yourlastname@example.com";
+$prefixSubject = "[Anfrage auf Webseite] ";
+$prefixMailBody = "Sie haben eine neue Anfrage über Ihre Webseite bekommen:
+
+";
+
 
 // Empty variables, will be filled by script
 $from = ""; 
@@ -40,13 +45,16 @@ if(isset($_POST["from"]) && isset($_POST["subject"]) && isset($_POST["message"])
 	$decodedbody = json_decode($requestbody,true);
 	
 	if(isset($decodedbody["from"]) && isset($decodedbody["subject"]) && isset($decodedbody["message"])) {
-		$from = $input["from"];
-		$subject = $input["subject"];
-		$message = $input["message"];
+		$from = $decodedbody["from"];
+		$subject = $decodedbody["subject"];
+		$message = $decodedbody["message"];
 	} else {
 		die(json_encode("wrong_params"));
 	}
 }
+
+$subject = $prefixSubject.$subject;
+$message = $prefixMailBody.$message;
 
 //Execute Mail
 $headers = "From: ".addslashes($from)."\r\n";

@@ -2,7 +2,7 @@
 #   (C)opyright 2017 by Andris Roling
 #   GIT https://github.com/andrisro/REST-PHP-Mailer
 
-#   Version: 1.1
+#   Version: 1.2
 
 
 #   -- German --
