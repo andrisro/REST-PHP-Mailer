@@ -2,13 +2,15 @@
 #   (C)opyright 2017 by Andris Roling
 #   GIT https://github.com/andrisro/REST-PHP-Mailer
 
-#   Version: 1.0
+#   Version: 1.1
 
 
 #   -- German --
 
     Beispielaufruf: 
     mail.php?from=firstname%40lastname.de&subject=test&message=message
+
+    oder PER POST-Methode.
 
     Parameter für Mail im Link
 
@@ -24,7 +26,9 @@
     Example Call: 
     mail.php?from=firstname%40lastname.de&subject=test&message=message
 
-    link-params for the mail: 
+    or with a POST-Call.
+
+    params for the mail: 
 
     from -> e-mail adress, which will be shown as the sender
     subject -> subject of the mail 
