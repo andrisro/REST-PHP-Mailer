@@ -17,19 +17,35 @@ $message = "";
 
 	You can call the Script by POST and GET Method by default.
 */
-if(isset($_POST["from"]) && isset($_POST["subject"]) && $_POST["message"]) {
+if(isset($_POST["from"]) && isset($_POST["subject"]) && isset($_POST["message"])) {
 	//Set Variables
 	$from = urldecode($_POST["from"]);
 	$subject = urldecode($_POST["subject"]);
 	$message = urldecode($_POST["message"]);
 
-} else if(isset($_GET["from"]) && isset($_GET["subject"]) && $_GET["message"]) {
+} else if(isset($_GET["from"]) && isset($_GET["subject"]) && isset($_GET["message"])) {
 	//Set Variables
 	$from = urldecode($_GET["from"]);
 	$subject = urldecode($_GET["subject"]);
 	$message = urldecode($_GET["message"]);
+} else if(isset($_REQUEST["from"]) && isset($_REQUEST["subject"]) && isset($_REQUEST["message"])) {
+	$from = urldecode($_REQUEST["from"]);
+	$subject = urldecode($_REQUEST["subject"]);
+	$message = urldecode($_REQUEST["message"]);	
 } else {
-	die(json_encode("wrong_params"));
+	$requestbody = file_get_contents("php://input");
+	
+	//die(json_encode($requestbody));
+	$decodedbody = array();
+	$decodedbody = json_decode($requestbody,true);
+	
+	if(isset($decodedbody["from"]) && isset($decodedbody["subject"]) && isset($decodedbody["message"])) {
+		$from = $input["from"];
+		$subject = $input["subject"];
+		$message = $input["message"];
+	} else {
+		die(json_encode("wrong_params"));
+	}
 }
 
 //Execute Mail
